@@ -15,7 +15,7 @@
         ] /* Specify multiple folders that act like './node_modules/@types'. */,
         "types": ["node"],
         "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+        // "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
         /* Type Checking */
         "strict": true,
         "skipLibCheck": true

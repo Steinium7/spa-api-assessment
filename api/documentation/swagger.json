@@ -1,0 +1,154 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My API",
+        "description": "Api that allows data in a txt file to be read and interacted with easily",
+        "contact": {
+            "name": "Michael Obeng",
+            "email": "michaelakwobeng@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Get a list of users",
+                "description": "Returns a list of users in the system",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new employee",
+                "description": "Creates a new employee in the file",
+                "produces": ["application/json"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Mike"
+                                    },
+                                    "surname": {
+                                        "type": "string",
+                                        "example": "Dan"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Accra"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "234-234-2342"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "one@two.com"
+                                    },
+                                    "dateofBirth": {
+                                        "type": "string",
+                                        "example": "12/12/2012"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "msg": "Success"
+                    }
+                }
+            }
+        },
+        "/upload": {
+            "post": {
+                "summary": "Upload Employees text file",
+                "description": "setting the txt as the database",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "msg": "Success"
+                    }
+                }
+            }
+        },
+        "/:id": {
+            "get": {
+                "summary": "get particular employee",
+                "description": "Returns the details of employee in the file",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "id of employee"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "6": [
+                                        "6",
+                                        "Cecilia",
+                                        "Temple",
+                                        "87 Arrowood Dri",
+                                        "904-495-3469",
+                                        "CeciliaGTemple@gustr.com",
+                                        "8/24/1987"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

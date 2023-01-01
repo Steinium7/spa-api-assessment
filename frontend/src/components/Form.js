@@ -32,7 +32,7 @@ export const Form = ({ setReload }) => {
             return 0;
         }
 
-        fetch(`localhost:4000/api/create`, {
+        fetch(`http://localhost:4000/api/create`, {
             method: "POST",
             body: JSON.stringify({
                 name: name.current.value,

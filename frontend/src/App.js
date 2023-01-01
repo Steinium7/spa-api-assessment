@@ -31,7 +31,7 @@ function App() {
             .map((key) => key + "=" + queryParams[key])
             .join("&");
 
-        fetch(`localhost:4000/api/all?${queryString}`, {
+        fetch(`http://localhost:4000/api/all?${queryString}`, {
             method: "GET",
         }).then(async (response) => {
             let data = await response.json();
@@ -53,7 +53,7 @@ function App() {
                 </header>
                 <Switch>
                     <Route exact path="/">
-                        <FileUploader />
+                        <FileUploader setReload={setReload}/>
                     </Route>
                     <Route exact path="/employees">
                         <EmployeeList

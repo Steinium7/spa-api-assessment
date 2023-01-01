@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 
-const FileUploader = () => {
+const FileUploader = ({setReload}) => {
     const fileInput = useRef(null);
     const history = useHistory();
 
@@ -17,12 +17,13 @@ const FileUploader = () => {
         const formData = new FormData();
         formData.append("file", file);
 
-        fetch("localhost:4000/api/uploads", {
+        fetch("http://localhost:4000/api/uploads", {
             method: "POST",
             body: formData,
         })
             .then((response) => {
                 if (response.ok) {
+                    setReload(true)
                     history.push("/employees");
                 }
                 throw new Error("Error uploading file");

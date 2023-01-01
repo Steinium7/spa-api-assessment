@@ -60,23 +60,18 @@ module.exports = {
 
             let main: IObjectKeys = {};
 
-            // main = formatData(data);
             let mainData: string[] = [];
             let page: number = 1;
 
             if (params.hasOwnProperty("page")) page = parseInt(params["page"]);
+            mainData = mainData.length != 0 ? mainData : data;
             if (params.hasOwnProperty("filter")) {
                 mainData = filterby(data, params["filter"]);
             }
             if (params.hasOwnProperty("sort")) {
-                mainData = sortby(
-                    mainData.length != 0 ? mainData : data,
-                    params["sort"]
-                );
+                mainData = sortby(mainData, params["sort"]);
             }
-            mainData = mainData.length != 0 ? mainData : data;
 
-            // console.log(mainData);
             //Pagination
             let numOfPages: string = `${Math.ceil(mainData.length / 10)}`;
             mainData = mainData.slice(page * 10 - 10, page * 10);
@@ -99,9 +94,16 @@ module.exports = {
         let main: IObjectKeys = {};
         try {
             let employee = data[parseInt(parameter) - 1].split(",");
-            employee[3] = employee[3].slice(3, -3);
-            employee[6] = employee[6].slice(0, -1);
-            main[employee[0]] = employee;
+
+            main = {
+                id: employee[0],
+                name: employee[1],
+                surname: employee[2],
+                address: employee[3].slice(3, -3),
+                phone: employee[4],
+                email: employee[5],
+                dateOfBirth: employee[6].slice(0, -1),
+            };
         } catch (error) {
             return error;
         }

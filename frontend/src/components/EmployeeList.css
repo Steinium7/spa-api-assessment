@@ -1,0 +1,9 @@
+.button-container {
+    display: flex;
+    margin-left: 3px;
+  }
+  
+  .button {
+    flex: 1;
+  }
+  

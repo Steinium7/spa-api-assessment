@@ -13,14 +13,10 @@ const FileUploader = () => {
         const formData = new FormData();
         formData.append("file", file);
 
-
-        fetch(
-            "https://localhost:4000/api/uploads",
-            {
-                method: "POST",
-                body: formData,
-            }
-        )
+        fetch("http://localhost:4000/api/uploads", {
+            method: "POST",
+            body: formData,
+        })
             .then((response) => {
                 if (response.ok) {
                     history.push("/employees");
@@ -28,7 +24,7 @@ const FileUploader = () => {
                 throw new Error("Error uploading file");
             })
             .catch((error) => {
-                alert(error)
+                alert(error);
                 console.error(error);
             });
     };

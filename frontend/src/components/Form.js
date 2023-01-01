@@ -32,23 +32,20 @@ export const Form = ({ setReload }) => {
             return 0;
         }
 
-        fetch(
-            `https://localhost:4000/api/create`,
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    name: name.current.value,
-                    surname: surname.current.value,
-                    address: address.current.value,
-                    phone: phone.current.value,
-                    email: email.current.value,
-                    dateOfBirth: dateOfBirth.current.value,
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        ).then(async (response) => {
+        fetch(`http://localhost:4000/api/create`, {
+            method: "POST",
+            body: JSON.stringify({
+                name: name.current.value,
+                surname: surname.current.value,
+                address: address.current.value,
+                phone: phone.current.value,
+                email: email.current.value,
+                dateOfBirth: dateOfBirth.current.value,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(async (response) => {
             setReload(true);
             history.push("/employees");
         });

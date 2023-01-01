@@ -31,12 +31,9 @@ function App() {
             .map((key) => key + "=" + queryParams[key])
             .join("&");
 
-        fetch(
-            `https://localhost:4000/api/all?${queryString}`,
-            {
-                method: "GET",
-            }
-        ).then(async (response) => {
+        fetch(`http://localhost:4000/api/all?${queryString}`, {
+            method: "GET",
+        }).then(async (response) => {
             let data = await response.json();
             setEmployees(Object.values(data));
         });

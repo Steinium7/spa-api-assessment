@@ -13,10 +13,9 @@ const FileUploader = () => {
         const formData = new FormData();
         formData.append("file", file);
 
-        // console.log(formData)
 
         fetch(
-            "https://3000-steinium7-spaapiassessm-c1ty6vaaqql.ws-eu80.gitpod.io/api/uploads",
+            "https://localhost:4000/api/uploads",
             {
                 method: "POST",
                 body: formData,
@@ -28,11 +27,8 @@ const FileUploader = () => {
                 }
                 throw new Error("Error uploading file");
             })
-            //   .then((data) => {
-            //     // Navigate to a new page here
-            //     history.push('/success');
-            //   })
             .catch((error) => {
+                alert(error)
                 console.error(error);
             });
     };

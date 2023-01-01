@@ -11,7 +11,6 @@ const EmployeeCard = ({ props }) => {
     return (
         <div
             className="container"
-            // key={props[0]}
             onClick={onClickCard}
         >
             <div className="word">

@@ -14,12 +14,9 @@ function EmployeeDetails() {
     };
 
     useEffect(() => {
-        fetch(
-            `https://3000-steinium7-spaapiassessm-c1ty6vaaqql.ws-eu80.gitpod.io/api/employee/${id}`,
-            {
-                method: "GET",
-            }
-        ).then(async (response) => {
+        fetch(`https://localhost:4000/api/employee/${id}`, {
+            method: "GET",
+        }).then(async (response) => {
             let data = await response.json();
             setData(data);
         });

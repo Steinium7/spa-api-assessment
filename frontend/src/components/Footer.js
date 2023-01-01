@@ -1,13 +1,33 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import "./Footer.css";
 
-export const Footer = ({ employees, setPage, filterSearch, setSort }) => {
+export const Footer = ({
+    employees,
+    setPage,
+    filterSearch,
+    setSort,
+    page,
+    filter,
+    sort,
+}) => {
     let filterSearchWord = useRef(null);
     const radioName = useRef();
     const radioSurname = useRef();
     const radioNone = useRef();
     let history = useHistory();
+
+    useEffect(() => {
+        filterSearchWord.current.value = filter;
+
+        if (sort === "name") {
+            radioName.current.checked = true;
+        } else if (sort === "surname") {
+            radioSurname.current.checked = true;
+        } else {
+            radioNone.current.checked = true;
+        }
+    }, [filter, sort]);
 
     const clickHandler = (one) => {
         setPage(parseInt(one));
@@ -26,6 +46,13 @@ export const Footer = ({ employees, setPage, filterSearch, setSort }) => {
     function openForm() {
         history.push("/add");
     }
+
+    const styles = {
+        main: {
+            backgroundColor: "#EEEE",
+        },
+        norm: {},
+    };
 
     return (
         <div className="search-container">
@@ -97,6 +124,9 @@ export const Footer = ({ employees, setPage, filterSearch, setSort }) => {
                                 <button
                                     key={one}
                                     className="button"
+                                    style={
+                                        page === one ? styles.main : styles.norm
+                                    }
                                     onClick={() => clickHandler(one)}
                                 >
                                     Page {one}

@@ -14,21 +14,13 @@ module.exports = {
         if (data instanceof Error)
             return res.status(500).send({ err: "There is an Error" });
 
-        res.send(data);
+        res.status(201).send(data);
     },
 
     createEmployee: (req: any, res: any) => {
         let data = employeeModel.createEmployee(req.body);
         if (!data) return res.sendStatus(200);
-        res.sendStatus(500);
-    },
-
-    filter: (req: any, res: any) => {
-        let data = employeeModel.getEmployees("filter", req.body.filter);
-        if (data instanceof Error)
-            return res.send({ err: "There is an Error" });
-
-        res.send(data);
+        res.sendStatus(500).send({ err: "There is an Error" });
     },
 
     fileUpload: (req: any, res: any) => {
@@ -38,7 +30,7 @@ module.exports = {
         // accessing the file
         let response = employeeModel.fileUpload(req.files.file);
 
-        if (response) return res.status(500).send({ msg: "Error occured" });
+        if (response) return res.status(500).send({ msg: "There is an Error" });
         return res.status(200).send({ msg: "File Uploaded" });
     },
 };

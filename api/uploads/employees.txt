@@ -30,4 +30,3 @@
 30,Donald,Schmidt,"1925 Mattson Street",503-431-9711,DonaldBSchmidt@rhyta.com,11/27/1952
 31,Michael,Obeng,Accra,234-5345-234,michaelakwobeng@gmail.com,12/01/2000
 32,Jayus,Jay,Dark Web,Unknown,Unknown@Unknown.hack,Unknown
-33,name,go,homefsaf,2435432,michaelakwobeng@gmail.com,2023-01-12

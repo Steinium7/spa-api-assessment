@@ -15,6 +15,7 @@ function App() {
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
+        setReload(false);
         let queryParams = Object.entries({
             page: page,
             filter: filter,
@@ -31,7 +32,7 @@ function App() {
             .join("&");
 
         fetch(
-            `https://3000-steinium7-spaapiassessm-c1ty6vaaqql.ws-eu80.gitpod.io/api/all?${queryString}`,
+            `https://localhost:4000/api/all?${queryString}`,
             {
                 method: "GET",
             }
@@ -63,6 +64,9 @@ function App() {
                             setPage={setPage}
                             filterSearch={filterSearch}
                             setSort={setSort}
+                            page={page}
+                            filter={filter}
+                            sort={sort}
                         />
                     </Route>
                     <Route exact path="/add">

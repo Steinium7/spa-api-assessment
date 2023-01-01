@@ -23,24 +23,17 @@ function formatData(data: string[]) {
 function filterby(data: string[], parameter: string) {
     const filterValues = data.filter((a: string) => {
         let splitData: string = a.split(",")[5];
-        return splitData.split("@")[1].includes(parameter);
+        return splitData.includes(parameter);
     });
 
     return filterValues;
 }
 
+//couldn't get the sorting to work properly
 function sortby(data: string[], by: "name" | "surname" | string) {
     let param: number = by == "name" ? 1 : 2;
     data.sort((a, b) => {
-        // console.log(a.split(',')[param]);
-        // return a.split(',')[param].localeCompare(b.split(',')[param]);
-        if (a.split(",")[param] < b.split(",")[param]) {
-            return -1;
-        } else if (a.split(",")[param] > b.split(",")[param]) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return a.split(",")[param].localeCompare(b.split(",")[param]);
     });
     return data;
 }
@@ -52,7 +45,6 @@ interface queryParams {
 module.exports = {
     getEmployees: (params: queryParams) => {
         try {
-            console.log(params);
             let data = readFile();
             interface IObjectKeys {
                 [key: string]: string[];
@@ -80,7 +72,6 @@ module.exports = {
 
             return main;
         } catch (err) {
-            console.error(err);
             return err;
         }
     },
@@ -131,7 +122,6 @@ module.exports = {
 
         myFile.mv(`${__dirname}/../uploads/employees.txt`, function (err: any) {
             if (err) {
-                console.log(err);
                 return 0;
             }
 

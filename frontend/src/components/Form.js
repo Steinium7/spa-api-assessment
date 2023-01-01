@@ -16,17 +16,24 @@ export const Form = ({ setReload }) => {
     }
 
     function submitForm() {
-        console.log([
+        let values = [
             name.current.value,
             surname.current.value,
             phone.current.value,
             email.current.value,
             address.current.value,
             dateOfBirth.current.value,
-        ]);
+        ].filter((a) => {
+            return a === "";
+        });
+
+        if (values.length !== 0) {
+            alert("Please fill all form fields");
+            return 0;
+        }
 
         fetch(
-            `https://3000-steinium7-spaapiassessm-c1ty6vaaqql.ws-eu80.gitpod.io/api/create`,
+            `https://localhost:4000/api/create`,
             {
                 method: "POST",
                 body: JSON.stringify({
@@ -42,11 +49,8 @@ export const Form = ({ setReload }) => {
                 },
             }
         ).then(async (response) => {
-            //to change
-            await response.json();
-            // setEmployees(Object.values(data));
             setReload(true);
-            history("/employees");
+            history.push("/employees");
         });
     }
 

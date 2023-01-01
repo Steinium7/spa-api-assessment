@@ -11,24 +11,129 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3000/api"
+            "url": "http://localhost:4000/api"
         }
     ],
+    "components": {
+        "responses": {
+            "Error": {
+                "description": "There is an Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "example": {
+                                "err": "There is an Error"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
     "paths": {
         "/": {
             "get": {
                 "summary": "Get a list of users",
                 "description": "Returns a list of users in the system",
                 "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "current page requested"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "sorting by name or surname"
+                    },
+                    {
+                        "in": "query",
+                        "name": "filter",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "filter by email"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/User"
+                            "type": "object",
+                            "example": {
+                                "1": [
+                                    "1",
+                                    "Della",
+                                    "Cox",
+                                    "DellaDCox@superrito.com"
+                                ],
+                                "2": [
+                                    "2",
+                                    "Walter",
+                                    "Jeske",
+                                    "WalterJJeske@armyspy.com"
+                                ],
+                                "3": [
+                                    "3",
+                                    "Ron",
+                                    "Plaza",
+                                    "RonAPlaza@dayrep.com"
+                                ],
+                                "4": [
+                                    "4",
+                                    "Emma",
+                                    "Kwak",
+                                    "EmmaAKwak@cuvox.de"
+                                ],
+                                "5": [
+                                    "5",
+                                    "Jimmy",
+                                    "Smith",
+                                    "JimmyTSmith@jourrapide.com"
+                                ],
+                                "6": [
+                                    "6",
+                                    "Cecilia",
+                                    "Temple",
+                                    "CeciliaGTemple@gustr.com"
+                                ],
+                                "7": [
+                                    "7",
+                                    "Ruth",
+                                    "Story",
+                                    "RuthPStory@dayrep.com"
+                                ],
+                                "8": [
+                                    "8",
+                                    "Brenda",
+                                    "Reynolds",
+                                    "BrendaRReynolds@superrito.com"
+                                ],
+                                "9": [
+                                    "9",
+                                    "Rene",
+                                    "Lewis",
+                                    "ReneSLewis@dayrep.com"
+                                ],
+                                "10": [
+                                    "10",
+                                    "Dale",
+                                    "Ward",
+                                    "DaleCWard@superrito.com"
+                                ],
+                                "numOfPages": ["4"]
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
                     }
                 }
             },
@@ -71,19 +176,19 @@
                         }
                     }
                 },
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                ],
                 "responses": {
                     "201": {
-                        "msg": "Success"
+                        "content": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "msg": "Success"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
                     }
                 }
             }
@@ -106,7 +211,26 @@
                 ],
                 "responses": {
                     "200": {
-                        "msg": "Success"
+                        "content": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "msg": "File Uploaded"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "There is an Error in uploading",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "err": "file is not found"
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -146,6 +270,9 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
                     }
                 }
             }

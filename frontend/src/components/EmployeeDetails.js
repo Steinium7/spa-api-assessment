@@ -14,7 +14,7 @@ function EmployeeDetails() {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/employee/${id}`, {
+        fetch(`localhost:4000/api/employee/${id}`, {
             method: "GET",
         }).then(async (response) => {
             let data = await response.json();

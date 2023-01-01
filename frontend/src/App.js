@@ -31,7 +31,7 @@ function App() {
             .map((key) => key + "=" + queryParams[key])
             .join("&");
 
-        fetch(`http://localhost:4000/api/all?${queryString}`, {
+        fetch(`localhost:4000/api/all?${queryString}`, {
             method: "GET",
         }).then(async (response) => {
             let data = await response.json();

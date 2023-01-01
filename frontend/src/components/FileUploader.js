@@ -9,6 +9,10 @@ const FileUploader = () => {
         event.preventDefault();
 
         const file = fileInput.current.files[0];
+        if (!file) {
+            alert("file not sent");
+            return 0;
+        }
 
         const formData = new FormData();
         formData.append("file", file);
@@ -24,7 +28,6 @@ const FileUploader = () => {
                 throw new Error("Error uploading file");
             })
             .catch((error) => {
-                alert(error);
                 console.error(error);
             });
     };

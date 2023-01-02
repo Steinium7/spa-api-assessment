@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 
-const FileUploader = ({setReload}) => {
+const FileUploader = ({setReload, setFileState}) => {
     const fileInput = useRef(null);
     const history = useHistory();
 
@@ -24,6 +24,7 @@ const FileUploader = ({setReload}) => {
             .then((response) => {
                 if (response.ok) {
                     setReload(true)
+                    setFileState(true)
                     history.push("/employees");
                 }
                 throw new Error("Error uploading file");

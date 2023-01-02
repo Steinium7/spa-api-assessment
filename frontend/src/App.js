@@ -3,45 +3,14 @@ import { EmployeeList } from "./components/EmployeeList";
 import { Form } from "./components/Form";
 import FileUploader from "./components/FileUploader";
 import EmployeeDetails from "./components/EmployeeDetails";
-import { useEffect } from "react";
+import { Protected } from "./components/Protected";
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
     const [employees, setEmployees] = useState([]);
-    const [page, setPage] = useState(1);
-    const [filter, setFilter] = useState("");
-    const [sort, setSort] = useState("");
     const [reload, setReload] = useState(false);
-
-    useEffect(() => {
-        setReload(false);
-        let queryParams = Object.entries({
-            page: page,
-            filter: filter,
-            sort: sort,
-        })
-            .filter(([key, val]) => val !== undefined && val !== "")
-            .reduce(
-                (obj, [key, val]) => Object.assign(obj, { [key]: val }),
-                {}
-            );
-
-        const queryString = Object.keys(queryParams)
-            .map((key) => key + "=" + queryParams[key])
-            .join("&");
-
-        fetch(`http://localhost:4000/api/all?${queryString}`, {
-            method: "GET",
-        }).then(async (response) => {
-            let data = await response.json();
-            setEmployees(Object.values(data));
-        });
-    }, [page, filter, sort, reload]);
-
-    const filterSearch = (newfilter) => {
-        setFilter(newfilter);
-    };
+    const [fileState, setFileState] = useState(false)
 
     return (
         <Router>
@@ -53,24 +22,28 @@ function App() {
                 </header>
                 <Switch>
                     <Route exact path="/">
-                        <FileUploader setReload={setReload}/>
+                        <FileUploader setReload={setReload} setFileState={setFileState}/>
                     </Route>
                     <Route exact path="/employees">
+                        <Protected fileState={fileState}>
                         <EmployeeList
                             employees={employees}
-                            setPage={setPage}
-                            filterSearch={filterSearch}
-                            setSort={setSort}
-                            page={page}
-                            filter={filter}
-                            sort={sort}
+                            setEmployees={setEmployees}
+                            reload={reload}
+                            setReload={setReload}
                         />
+                        </Protected>
+
                     </Route>
                     <Route exact path="/add">
+                    <Protected fileState={fileState}>
                         <Form setReload={setReload} />
+                    </Protected>
                     </Route>
                     <Route exact path="/employee/:id">
-                        <EmployeeDetails props={employees} />
+                        <Protected fileState={fileState}>
+                            <EmployeeDetails props={employees} />
+                        </Protected>
                     </Route>
                 </Switch>
             </div>

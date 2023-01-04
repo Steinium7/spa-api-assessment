@@ -37,7 +37,7 @@ export const Form = ({ setReload }) => {
             body: JSON.stringify({
                 name: name.current.value,
                 surname: surname.current.value,
-                address: address.current.value,
+                address: `"/${address.current.value}"`,
                 phone: phone.current.value,
                 email: email.current.value,
                 dateOfBirth: dateOfBirth.current.value,
@@ -51,9 +51,10 @@ export const Form = ({ setReload }) => {
         });
     }
 
+
     return (
         <div>
-            <div>
+            <div className="form-fill">
                 <form onSubmit={(event) => event.preventDefault()}>
                     <label htmlFor="name">Name:</label>
                     <br />

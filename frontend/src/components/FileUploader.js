@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 
-const FileUploader = ({setReload, setFileState}) => {
+const FileUploader = ({ setReload, setFileState }) => {
     const fileInput = useRef(null);
     const history = useHistory();
 
@@ -23,11 +23,12 @@ const FileUploader = ({setReload, setFileState}) => {
         })
             .then((response) => {
                 if (response.ok) {
-                    setReload(true)
-                    setFileState(true)
+                    setReload(true);
+                    setFileState(true);
                     history.push("/employees");
-                }
+                }else{
                 throw new Error("Error uploading file");
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -35,11 +36,28 @@ const FileUploader = ({setReload, setFileState}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="file">Select a file:</label>
-            <input type="file" ref={fileInput} />
-            <button type="submit">Upload</button>
-        </form>
+        <div className="container-fluid container-sm d-flex">
+            
+            <div className="input-group mt-5">
+                <input
+                    type="file"
+                    htmlFor="file"
+                    className="form-control"
+                    id="inputGroupFile04"
+                    aria-describedby="inputGroupFileAddon04"
+                    aria-label="Upload"
+                    ref={fileInput}
+                />
+                <button
+                    className="btn btn-outline-primary"
+                    type="button"
+                    id="inputGroupFileAddon04"
+                    onClick={handleSubmit}
+                >
+                    Button
+                </button>
+            </div>
+        </div>
     );
 };
 

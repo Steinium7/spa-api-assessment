@@ -10,3 +10,5 @@ In the respective directories, you ca run:
 
 Starts both servers
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+Docs at route /api-docs

@@ -15,6 +15,9 @@ function formatData(data: string[]) {
         let employee = entry.split(",");
         main[employee[0]] = employee.slice(0, 3);
         main[employee[0]].push(employee[5]);
+        main[employee[0]].push(employee[3].slice(1,-1))
+        main[employee[0]].push(employee[4])
+        main[employee[0]].push(employee[6].slice(0, -1))
     }
 
     return main;
